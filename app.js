@@ -26,7 +26,8 @@ const sessionOptions = {
     saveUninitialized : false,
     cookie: {
         httpOnly : true,
-        maxAge: 7 * 24 * 60 * 60 * 1000
+        maxAge: 7 * 24 * 60 * 60 * 1000,
+        secure: process.env.NODE_ENV === "production"
     }
 }
 
@@ -540,6 +541,8 @@ app.use((err , req , res , next) => {
     res.status(statusCode).render("error.ejs" , {message});
     console.log(err);
 })
+
+const PORT = process.env.PORT || 3000;
 
 app.listen(3000 , () => {
     console.log("listening on port 3000");
