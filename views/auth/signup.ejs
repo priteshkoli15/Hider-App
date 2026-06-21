@@ -1,0 +1,254 @@
+<%- include("../partials/head.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+<%- include("../partials/flash.ejs") %>
+
+<style>
+
+    .auth-wrapper {
+
+        min-height: calc(100vh - 180px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 2rem 1rem;
+
+    }
+
+    .auth-card {
+
+        width: 100%;
+
+        max-width: 500px;
+
+        padding: 2.8rem;
+
+    }
+
+    .signup-badge {
+
+        width: 64px;
+        height: 64px;
+
+        margin: 0 auto 1.6rem;
+
+        border-radius: 18px;
+
+        background:
+            rgba(34, 197, 94, 0.10);
+
+        border:
+            1px solid rgba(34, 197, 94, 0.22);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: var(--success-color);
+
+        font-size: 1.4rem;
+
+        font-weight: 800;
+
+    }
+
+    .auth-title {
+
+        text-align: center;
+
+        font-size: 2rem;
+
+        margin-bottom: 0.6rem;
+
+    }
+
+    .auth-subtitle {
+
+        text-align: center;
+
+        color: var(--text-secondary);
+
+        margin-bottom: 2.3rem;
+
+        font-size: 0.96rem;
+
+        line-height: 1.7;
+
+    }
+
+    .auth-btn {
+
+        width: 100%;
+
+        padding: 0.95rem;
+
+        margin-top: 0.5rem;
+
+    }
+
+    .auth-footer-text {
+
+        text-align: center;
+
+        color: var(--text-secondary);
+
+        margin-bottom: 1rem;
+
+        font-size: 0.92rem;
+
+    }
+
+    .auth-secondary-btn {
+
+        width: 100%;
+
+        padding: 0.9rem;
+
+    }
+
+    @media (max-width: 576px) {
+
+        .auth-card {
+
+            padding: 2rem 1.3rem;
+
+            border-radius: 18px;
+
+        }
+
+        .auth-title {
+
+            font-size: 1.7rem;
+
+        }
+
+    }
+
+</style>
+
+<div class="auth-wrapper">
+
+    <div class="vault-card auth-card">
+
+        <div class="signup-badge">
+            +
+        </div>
+
+        <h1 class="auth-title">
+            Create Your Vault
+        </h1>
+
+        <p class="auth-subtitle">
+            Secure your private notes, passwords, and hidden data
+            inside your own encrypted personal vault.
+        </p>
+
+        <form action="/signup" method="POST">
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Username
+                </label>
+
+                <input
+                    type="text"
+                    name="username"
+                    placeholder="Choose a username"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    class="form-control"
+                    required
+                >
+
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Password
+                </label>
+
+                <input
+                    id="signupPassword"
+                    type="password"
+                    name="password"
+                    placeholder="Create a secure password"
+                    class="form-control"
+                    required
+                >
+                <div class="form-check mt-2">
+                    <input type="checkbox" id="showPassword"
+                    class="form-check-input"
+                    >
+                    <label for="showPassword" class="form-check-label">
+                        Show Password
+                    </label>
+                </div>
+
+            </div>
+
+            <button class="btn btn-primary auth-btn">
+                Create Account
+            </button>
+
+        </form>
+
+        <hr>
+
+        <p class="auth-footer-text">
+            Already have an account?
+        </p>
+
+        <a
+            href="/login"
+            class="btn btn-outline-light auth-secondary-btn"
+        >
+            Login Instead
+        </a>
+
+    </div>
+
+</div>
+
+<script>
+
+    const passwordInput =
+        document.getElementById("signupPassword");
+
+    const showPassword =
+        document.getElementById("showPassword");
+
+    showPassword.addEventListener("change", () => {
+
+        if(showPassword.checked){
+            passwordInput.type = "text";
+        }
+        else{
+            passwordInput.type = "password";
+        }
+
+    });
+
+</script>
+
+<%- include("../partials/footer.ejs") %>

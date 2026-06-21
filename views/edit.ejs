@@ -1,0 +1,277 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/navbar.ejs") %>
+<%- include("partials/flash.ejs") %>
+<style>
+
+    .edit-wrapper {
+
+        min-height: calc(100vh - 180px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 2rem 1rem;
+
+    }
+
+    .edit-card {
+
+        width: 100%;
+
+        max-width: 760px;
+
+        padding: 2.8rem;
+
+    }
+
+    .edit-badge {
+
+        width: 64px;
+        height: 64px;
+
+        border-radius: 18px;
+
+        background:
+            rgba(79, 140, 255, 0.10);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.20);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: var(--accent-primary);
+
+        font-size: 1.3rem;
+
+        font-weight: 800;
+
+        margin-bottom: 1.6rem;
+
+    }
+
+    .edit-title {
+
+        font-size: 2rem;
+
+        margin-bottom: 0.7rem;
+
+        line-height: 1.15;
+
+    }
+
+    .edit-subtitle {
+
+        color: var(--text-secondary);
+
+        margin-bottom: 2.4rem;
+
+        line-height: 1.8;
+
+        max-width: 620px;
+
+    }
+
+    .secret-textarea {
+
+        min-height: 260px;
+
+        resize: vertical;
+
+        line-height: 1.9;
+
+        font-size: 0.96rem;
+
+    }
+
+    .edit-actions {
+
+        display: flex;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+        margin-top: 2rem;
+
+    }
+
+    .edit-actions .btn {
+
+        padding:
+            0.95rem 1.5rem;
+
+        min-width: 180px;
+
+        font-weight: 600;
+
+    }
+
+    .info-box {
+
+        margin-top: 2.5rem;
+
+        padding: 1.3rem 1.5rem;
+
+        border-radius: 18px;
+
+        background:
+            rgba(79, 140, 255, 0.06);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.12);
+
+    }
+
+    .info-box h6 {
+
+        margin-bottom: 0.7rem;
+
+        font-size: 1rem;
+
+    }
+
+    .info-box p {
+
+        margin-bottom: 0;
+
+        color: var(--text-secondary);
+
+        line-height: 1.8;
+
+        font-size: 0.92rem;
+
+    }
+
+    @media (max-width: 768px) {
+
+        .edit-card {
+
+            padding: 2rem 1.4rem;
+
+        }
+
+        .edit-title {
+
+            font-size: 1.7rem;
+
+        }
+
+    }
+
+    @media (max-width: 576px) {
+
+        .edit-actions {
+
+            flex-direction: column;
+
+        }
+
+        .edit-actions .btn {
+
+            width: 100%;
+
+        }
+
+    }
+
+</style>
+
+<div class="edit-wrapper">
+
+    <div class="vault-card edit-card">
+
+        <div class="edit-badge">
+            E
+        </div>
+
+        <h1 class="edit-title">
+            Edit Hidden Secret
+        </h1>
+
+        <p class="edit-subtitle">
+
+            Update your hidden data securely. Changes made here
+            will immediately replace the previously stored content.
+
+        </p>
+
+        <form
+            action="/datas/<%= data._id %>?_method=PUT"
+            method="post"
+        >
+        <div class="mb-3">
+            <label for="title" class="form-label">
+                Secret Title
+            </label>
+        
+            <input
+                type="text"
+                id="title"
+                name="title"
+                class="form-control"
+                maxlength="100"
+                required
+                value="<%= data.title || '' %>"
+            >
+        </div>
+
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Hidden Data
+                </label>
+
+                <textarea
+                    name="hiddenData"
+                    class="form-control secret-textarea"
+                    required
+                ><%= data.hiddenData %></textarea>
+
+            </div>
+
+            <div class="edit-actions">
+
+                <button class="btn btn-primary">
+                    Save Changes
+                </button>
+
+                <a
+                    href="/datas"
+                    class="btn btn-outline-light"
+                >
+                    Cancel
+                </a>
+
+            </div>
+
+        </form>
+
+        <div class="info-box">
+
+            <h6>
+                Update Notice
+            </h6>
+
+            <p>
+
+                Editing this secret will overwrite the previous
+                hidden content permanently. Make sure the updated
+                information is correct before saving changes.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include("partials/footer.ejs") %>

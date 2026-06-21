@@ -1,0 +1,527 @@
+<%- include("../partials/head.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+<%- include("../partials/flash.ejs") %>
+<style>
+
+    .dashboard-wrapper {
+
+        padding:
+            2rem 0 4rem;
+
+    }
+
+    .dashboard-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+        margin-bottom: 2.5rem;
+
+    }
+
+    .dashboard-title {
+
+        font-size: 2.5rem;
+
+        margin-bottom: 0.5rem;
+
+        line-height: 1.1;
+
+    }
+
+    .dashboard-subtitle {
+
+        color: var(--text-secondary);
+
+        margin-bottom: 0;
+
+        line-height: 1.8;
+
+    }
+
+    .create-secret-btn {
+
+        padding:
+            0.95rem 1.4rem;
+
+        font-weight: 600;
+
+    }
+
+    .stats-bar {
+
+        display: flex;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+        margin-bottom: 2.5rem;
+
+    }
+
+    .stats-card {
+
+        flex: 1;
+
+        min-width: 220px;
+
+        padding: 1.4rem;
+
+        border-radius: 20px;
+
+        background-color: var(--card-bg);
+
+        border: 1px solid var(--border-color);
+
+    }
+
+    .stats-label {
+
+        color: var(--text-secondary);
+
+        font-size: 0.9rem;
+
+        margin-bottom: 0.6rem;
+
+    }
+
+    .stats-value {
+
+        font-size: 2rem;
+
+        font-weight: 700;
+
+        line-height: 1;
+
+    }
+
+    .empty-state {
+
+        text-align: center;
+
+        padding:
+            5rem 2rem;
+
+    }
+
+    .empty-icon {
+
+        width: 78px;
+        height: 78px;
+
+        border-radius: 22px;
+
+        margin: 0 auto 1.6rem;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background:
+            rgba(79, 140, 255, 0.10);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.18);
+
+        color:
+            var(--accent-primary);
+
+        font-size: 1.8rem;
+
+        font-weight: 800;
+
+    }
+
+    .empty-title {
+
+        font-size: 1.7rem;
+
+        margin-bottom: 0.8rem;
+
+    }
+
+    .empty-text {
+
+        color: var(--text-secondary);
+
+        max-width: 500px;
+
+        margin: 0 auto 2rem;
+
+        line-height: 1.8;
+
+    }
+
+    .secret-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(auto-fit, minmax(320px, 1fr));
+
+        gap: 1.5rem;
+
+    }
+
+    .secret-card {
+
+        padding: 1.7rem;
+
+        transition: var(--transition);
+
+        display: flex;
+
+        flex-direction: column;
+
+        justify-content: space-between;
+
+        min-height: 280px;
+
+    }
+
+    .secret-card:hover {
+
+        transform: translateY(-4px);
+
+        border-color:
+            rgba(79, 140, 255, 0.35);
+
+    }
+
+    .secret-top {
+
+        margin-bottom: 1.5rem;
+
+    }
+
+    .secret-label {
+
+        display: inline-block;
+
+        padding:
+            0.4rem 0.8rem;
+
+        border-radius: 999px;
+
+        background:
+            rgba(79, 140, 255, 0.10);
+
+        color:
+            var(--accent-primary);
+
+        font-size: 0.8rem;
+
+        font-weight: 600;
+
+        margin-bottom: 1rem;
+
+    }
+
+    .secret-content {
+
+        color: var(--text-primary);
+
+        line-height: 1.9;
+
+        word-break: break-word;
+
+        white-space: pre-wrap;
+
+    }
+
+    .secret-actions {
+
+        display: flex;
+
+        gap: 0.8rem;
+
+        margin-top: 2rem;
+
+    }
+
+    .secret-actions form {
+
+        flex: 1;
+
+    }
+
+    .secret-actions .btn {
+
+        width: 100%;
+
+        padding: 0.8rem 1rem;
+
+        font-weight: 600;
+
+    }
+
+    .delete-btn {
+
+        background-color: var(--danger-color);
+
+        border: none;
+
+    }
+
+    .delete-btn:hover {
+
+        background-color: #dc2626;
+
+    }
+
+    @media (max-width: 768px) {
+
+        .dashboard-title {
+
+            font-size: 2rem;
+
+        }
+
+    }
+
+    @media (max-width: 576px) {
+
+        .dashboard-header {
+
+            align-items: stretch;
+
+        }
+
+        .create-secret-btn {
+
+            width: 100%;
+
+        }
+
+        .secret-actions {
+
+            flex-direction: column;
+
+        }
+
+    }
+
+</style>
+
+<div class="dashboard-wrapper">
+
+    <div class="dashboard-header">
+
+        <div>
+
+            <h1 class="dashboard-title">
+                Your Personal Vault
+            </h1>
+
+            <p class="dashboard-subtitle">
+
+                Manage, organize, and protect your private
+                hidden data securely inside your vault.
+
+            </p>
+
+        </div>
+
+        <form action="/vault/new" method="get">
+
+            <button
+                class="btn btn-primary create-secret-btn"
+            >
+                Create New Secret
+            </button>
+
+        </form>
+
+    </div>
+
+    <div class="stats-bar">
+
+        <div class="stats-card">
+
+            <p class="stats-label">
+                Total Secrets
+            </p>
+
+            <h2 class="stats-value">
+                <%= totalSecrets %>
+            </h2>
+
+        </div>
+
+        <div class="stats-card">
+            <p class="stats-label">
+                Showing Results
+            </p>
+
+            <h2 class="stats-value">
+                <%= allData.length %>
+            </h2>
+        </div>
+        
+
+    </div>
+    
+    <form action="/dashboard" method="GET" class="mb-4">
+        <input type="text" name="search" placeholder="Search your secrets..." value="<%= search %>" 
+        class="form-control">
+    </form>
+
+
+    <% if(totalSecrets === 0){ %>
+
+        <div class="vault-card empty-state">
+
+            <div class="empty-icon">
+                V
+            </div>
+
+            <h2 class="empty-title">
+                Your Vault is Empty
+            </h2>
+
+            <p class="empty-text">
+
+                Start storing your private information securely.
+                Create your first secret and manage everything
+                from your personal dashboard.
+
+            </p>
+
+            <form action="/vault/new" method="get">
+
+                <button class="btn btn-primary">
+                    Create First Secret
+                </button>
+
+            </form>
+
+        </div>
+
+        <% } else if(allData.length === 0) {%>
+        <div class="vault-card empty-state">
+            <div class="empty-icon">
+                  ? 
+            </div>
+            <h2 class="empty-title">
+                No Matching secrets Found
+            </h2>
+
+            <p class="empty-text">
+                No secrets matched your search. 
+                Try a different keyword.
+            </p>
+        </div>
+         
+
+    <% } else { %>
+
+        <div class="secret-grid">
+
+            <% for(let data of allData) { %>
+
+                <div class="vault-card secret-card">
+
+                    <div class="secret-top">
+
+                        <span class="secret-label">
+                            Private Secret
+                        </span>
+
+                        <h4 class="mb-2">
+                            <%= data.title || "Untitled Secret" %>
+                        </h4>
+                        
+                        <p class="text-secondary small mb-2">
+                            Created: <%= data.createdAt
+                            ? data.createdAt.toLocaleDateString() : "Unknown" 
+                            %>
+                        </p>
+                        <p class="text-secondary small mb-2">
+                            Updated: 
+                            <%= data.updatedAt
+                            ? data.updatedAt.toLocaleDateString() : "Unknown"
+                            %>
+                        </p>
+                        <div class="secret-content">
+
+                            <% if(data.hiddenData.length > 120){ %>
+                                <%= data.hiddenData.slice(0,120) %>...
+                                <% } else { %>
+                                    <%= data.hiddenData %>
+                                <% } %>
+
+                        </div>
+
+                    </div>
+
+                    <div class="secret-actions">
+
+                        <form
+                            action="/vault/<%= data._id %>/edit"
+                            method="get"
+                        >
+
+                            <button class="btn btn-primary">
+                                Edit
+                            </button>
+
+                        </form>
+
+                        <form
+                            action="/vault/<%= data._id %>?_method=DELETE"
+                            method="POST"
+                        >
+
+                            <button
+                                class="btn delete-btn"
+                                onclick="return confirm('Delete this secret?')"
+                            >
+                                Delete
+                            </button>
+
+                        </form>
+                        <form action="/vault/<%= data._id %>" method="get">
+                            <button class="btn btn-outline-light">
+                                View
+                            </button>
+                        </form>
+
+                    </div>
+
+                </div>
+
+            <% } %>
+
+        </div>
+
+    <% } %>
+
+</div>
+
+<div class="text-center mt-5">
+    <hr class="my-4">
+
+    <h5 class="text-danger">
+        Danger Zone
+    </h5>
+
+    <p class="text-secondary">
+        Deleting your account will permanently remove your vault secrets and cannot be undone.
+    </p>
+    <a href="/account/delete" class="btn delete-btn">
+        Delete Account
+    </a>
+
+</div>
+
+<%- include("../partials/footer.ejs") %>

@@ -1,0 +1,500 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/navbar.ejs") %>
+<%- include("partials/flash.ejs") %>
+
+<style>
+
+    .hero-section {
+
+        padding:
+            4rem 0 3rem;
+
+    }
+
+    .hero-badge {
+
+        display: inline-flex;
+
+        align-items: center;
+
+        gap: 0.6rem;
+
+        padding:
+            0.65rem 1rem;
+
+        border-radius: 999px;
+
+        background:
+            rgba(79, 140, 255, 0.10);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.18);
+
+        color:
+            var(--accent-primary);
+
+        font-size: 0.9rem;
+
+        font-weight: 600;
+
+        margin-bottom: 1.4rem;
+
+    }
+
+    .hero-title {
+
+        font-size: 4rem;
+
+        line-height: 1.08;
+
+        max-width: 760px;
+
+        margin-bottom: 1.3rem;
+
+    }
+
+    .hero-description {
+
+        max-width: 700px;
+
+        font-size: 1.08rem;
+
+        color: var(--text-secondary);
+
+        line-height: 1.9;
+
+        margin-bottom: 2.5rem;
+
+    }
+
+    .hero-actions {
+
+        display: flex;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+        margin-bottom: 4rem;
+
+    }
+
+    .hero-btn {
+
+        padding:
+            0.95rem 1.5rem;
+
+        font-size: 0.96rem;
+
+    }
+
+    .feature-grid {
+
+        display: grid;
+
+        grid-template-columns:
+            repeat(auto-fit, minmax(320px, 1fr));
+
+        gap: 1.8rem;
+
+    }
+
+    .feature-card {
+
+        padding: 2rem;
+
+        transition: var(--transition);
+
+    }
+
+    .feature-card:hover {
+
+        transform: translateY(-4px);
+
+        border-color:
+            rgba(79, 140, 255, 0.35);
+
+    }
+
+    .feature-icon {
+
+        width: 58px;
+        height: 58px;
+
+        border-radius: 18px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        font-size: 1.2rem;
+
+        font-weight: 700;
+
+        margin-bottom: 1.5rem;
+
+    }
+
+    .feature-icon-anon {
+
+        background:
+            rgba(79, 140, 255, 0.10);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.20);
+
+        color:
+            var(--accent-primary);
+
+    }
+
+    .feature-icon-private {
+
+        background:
+            rgba(34, 197, 94, 0.10);
+
+        border:
+            1px solid rgba(34, 197, 94, 0.20);
+
+        color:
+            var(--success-color);
+
+    }
+
+    .feature-title {
+
+        font-size: 1.45rem;
+
+        margin-bottom: 1rem;
+
+    }
+
+    .feature-list {
+
+        list-style: none;
+
+        padding-left: 0;
+
+        margin-bottom: 2rem;
+
+    }
+
+    .feature-list li {
+
+        color: var(--text-secondary);
+
+        margin-bottom: 0.9rem;
+
+        position: relative;
+
+        padding-left: 1.4rem;
+
+    }
+
+    .feature-list li::before {
+
+        content: "";
+
+        width: 7px;
+        height: 7px;
+
+        border-radius: 999px;
+
+        background-color:
+            var(--accent-primary);
+
+        position: absolute;
+
+        left: 0;
+        top: 10px;
+
+    }
+
+    .access-form {
+
+        margin-top: 1.5rem;
+
+    }
+
+    .access-form .form-control {
+
+        margin-bottom: 1rem;
+
+    }
+
+    .card-divider {
+
+        margin:
+            1.8rem 0;
+
+    }
+
+    .security-note {
+
+        margin-top: 4rem;
+
+        padding: 1.4rem 1.6rem;
+
+        border-radius: 18px;
+
+        background:
+            rgba(79, 140, 255, 0.06);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.12);
+
+        color: var(--text-secondary);
+
+        line-height: 1.8;
+
+    }
+
+    .security-note strong {
+
+        color: var(--text-primary);
+
+    }
+
+    @media (max-width: 768px) {
+
+        .hero-title {
+
+            font-size: 2.8rem;
+
+        }
+
+        .hero-description {
+
+            font-size: 1rem;
+
+        }
+
+        .hero-section {
+
+            padding-top: 2rem;
+
+        }
+
+    }
+
+    @media (max-width: 576px) {
+
+        .hero-title {
+
+            font-size: 2.2rem;
+
+        }
+
+        .hero-actions {
+
+            flex-direction: column;
+
+        }
+
+        .hero-btn {
+
+            width: 100%;
+
+        }
+
+    }
+
+</style>
+
+<section class="hero-section">
+
+    <div class="hero-badge">
+        Secure • Private • Minimal
+    </div>
+
+    <h1 class="hero-title">
+        Store Your Hidden Data
+        Inside a Secure Digital Vault
+    </h1>
+
+    <p class="hero-description">
+
+        Locker Vault allows you to securely create, access,
+        and manage hidden information using either anonymous
+        secret storage or your own private authenticated vault.
+
+    </p>
+
+    <div class="hero-actions">
+
+        <a
+            href="/datas/new"
+            class="btn btn-primary hero-btn"
+        >
+            Create Secret
+        </a>
+
+        <a
+            href="/signup"
+            class="btn btn-outline-light hero-btn"
+        >
+            Create Private Vault
+        </a>
+
+    </div>
+
+    <div class="feature-grid">
+
+        <!-- Anonymous Locker -->
+
+        <div class="vault-card feature-card">
+
+            <div class="feature-icon feature-icon-anon">
+                A
+            </div>
+
+            <h2 class="feature-title">
+                Anonymous Locker
+            </h2>
+
+            <ul class="feature-list">
+
+                <li>
+                    Create hidden data instantly without signup
+                </li>
+
+                <li>
+                    Access data manually using ID and password
+                </li>
+
+                <li>
+                    Lightweight temporary secret storage
+                </li>
+
+            </ul>
+
+            <hr class="card-divider">
+
+            <form
+                action="/accessdata"
+                method="get"
+                class="access-form"
+            >
+
+                <input
+                    type="text"
+                    name="dataId"
+                    placeholder="Enter Secret ID"
+                    class="form-control"
+                    required
+                >
+            
+                <input
+                    id="secretPassword"
+                    type="password"
+                    name="pass"
+                    placeholder="Enter Password"
+                    class="form-control"
+                    required
+                >
+                <div class="form-check mt-2">
+                    <input type="checkbox" id="showPassword"
+                    class="form-check-input"
+                    >
+                    <label for="showPassword" class="form-check-label">
+                        Show Password
+                    </label>
+                </div>
+            
+                <button
+                    type="submit"
+                    class="btn btn-primary w-100"
+                >
+                    Access Secret
+                </button>
+
+            </form>
+
+            <a
+                href="/datas/new"
+                class="btn btn-outline-light w-100 mt-3"
+            >
+                Create Anonymous Secret
+            </a>
+
+        </div>
+
+        <!-- Private Vault -->
+
+        <div class="vault-card feature-card">
+
+            <div class="feature-icon feature-icon-private">
+                V
+            </div>
+
+            <h2 class="feature-title">
+                Private Vault
+            </h2>
+
+            <ul class="feature-list">
+
+                <li>
+                    Store multiple secrets permanently
+                </li>
+
+                <li>
+                    Access your personal dashboard securely
+                </li>
+
+                <li>
+                    Full create, edit, and delete management
+                </li>
+
+            </ul>
+
+            <hr class="card-divider">
+
+            <a
+                href="/signup"
+                class="btn btn-primary w-100 mb-3"
+            >
+                Create Account
+            </a>
+
+            <a
+                href="/login"
+                class="btn btn-outline-light w-100"
+            >
+                Login to Vault
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="security-note">
+
+        <strong>
+            Privacy First:
+        </strong>
+
+        Your anonymous secrets require both the manually entered
+        secret ID and password for access. Your private vault
+        uses authenticated account-based storage for managing
+        multiple secrets securely.
+
+    </div>
+
+</section>
+
+<script>
+    const passwordInput = document.getElementById("secretPassword");
+    const showPassword = document.getElementById("showPassword");
+
+    showPassword.addEventListener("change", ()=> {
+    if(showPassword.checked){
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+});
+</script>
+
+<%- include("partials/footer.ejs") %>

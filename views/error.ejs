@@ -1,0 +1,217 @@
+<%- include("partials/head.ejs") %>
+<%- include("partials/navbar.ejs") %>
+
+<style>
+
+    .error-wrapper {
+
+        min-height: calc(100vh - 180px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 2rem 1rem;
+
+    }
+
+    .error-card {
+
+        width: 100%;
+
+        max-width: 620px;
+
+        padding: 3rem 2.5rem;
+
+        text-align: center;
+
+    }
+
+    .error-icon {
+
+        width: 84px;
+        height: 84px;
+
+        margin: 0 auto 1.8rem;
+
+        border-radius: 24px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        background:
+            rgba(239, 68, 68, 0.10);
+
+        border:
+            1px solid rgba(239, 68, 68, 0.18);
+
+        color:
+            var(--danger-color);
+
+        font-size: 2rem;
+
+        font-weight: 800;
+
+    }
+
+    .error-code {
+
+        color: var(--danger-color);
+
+        font-size: 0.9rem;
+
+        font-weight: 600;
+
+        letter-spacing: 0.08em;
+
+        text-transform: uppercase;
+
+        margin-bottom: 1rem;
+
+    }
+
+    .error-title {
+
+        font-size: 2.2rem;
+
+        line-height: 1.1;
+
+        margin-bottom: 1rem;
+
+    }
+
+    .error-message {
+
+        color: var(--text-secondary);
+
+        line-height: 1.9;
+
+        font-size: 1rem;
+
+        margin-bottom: 2.5rem;
+
+    }
+
+    .error-actions {
+
+        display: flex;
+
+        justify-content: center;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+    }
+
+    .error-actions .btn {
+
+        min-width: 180px;
+
+        padding:
+            0.95rem 1.5rem;
+
+        font-weight: 600;
+
+    }
+
+    .secondary-btn {
+
+        border: 1px solid var(--border-color);
+
+        color: var(--text-primary);
+
+        background-color: transparent;
+
+    }
+
+    .secondary-btn:hover {
+
+        background-color: var(--secondary-bg);
+
+        border-color: var(--accent-primary);
+
+        color: var(--text-primary);
+
+    }
+
+    @media (max-width: 576px) {
+
+        .error-card {
+
+            padding: 2.2rem 1.4rem;
+
+        }
+
+        .error-title {
+
+            font-size: 1.8rem;
+
+        }
+
+        .error-actions {
+
+            flex-direction: column;
+
+        }
+
+        .error-actions .btn {
+
+            width: 100%;
+
+        }
+
+    }
+
+</style>
+
+<div class="error-wrapper">
+
+    <div class="vault-card error-card">
+
+        <div class="error-icon">
+            !
+        </div>
+
+        <p class="error-code">
+            Access Error
+        </p>
+
+        <h1 class="error-title">
+            Something Went Wrong
+        </h1>
+
+        <p class="error-message">
+
+            <%= message %>
+
+        </p>
+
+        <div class="error-actions">
+
+            <a
+                href="/datas"
+                class="btn btn-primary"
+            >
+                Go Back Home
+            </a>
+
+            <a
+                href="/dashboard"
+                class="btn secondary-btn"
+            >
+                Open Dashboard
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+<%- include("partials/footer.ejs") %>

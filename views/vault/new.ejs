@@ -1,0 +1,353 @@
+
+<%- include("../partials/head.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+<%- include("../partials/flash.ejs") %>
+
+<style>
+
+    .vault-create-wrapper {
+
+        min-height: calc(100vh - 180px);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        padding: 2rem 1rem;
+
+    }
+
+    .vault-create-card {
+
+        width: 100%;
+
+        max-width: 780px;
+
+        padding: 2.8rem;
+
+    }
+
+    .vault-create-badge {
+
+        width: 64px;
+        height: 64px;
+
+        border-radius: 18px;
+
+        background:
+            rgba(34, 197, 94, 0.10);
+
+        border:
+            1px solid rgba(34, 197, 94, 0.22);
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        color: var(--success-color);
+
+        font-size: 1.4rem;
+
+        font-weight: 800;
+
+        margin-bottom: 1.6rem;
+
+    }
+
+    .vault-create-title {
+
+        font-size: 2.2rem;
+
+        line-height: 1.15;
+
+        margin-bottom: 0.7rem;
+
+    }
+
+    .vault-create-subtitle {
+
+        color: var(--text-secondary);
+
+        line-height: 1.8;
+
+        margin-bottom: 2.5rem;
+
+        max-width: 620px;
+
+    }
+
+    .secret-textarea {
+
+        min-height: 280px;
+
+        resize: vertical;
+
+        line-height: 1.9;
+
+        font-size: 0.96rem;
+
+    }
+
+    .password-note {
+
+        color: var(--text-secondary);
+
+        font-size: 0.88rem;
+
+        margin-top: 0.7rem;
+
+        line-height: 1.7;
+
+    }
+
+    .vault-actions {
+
+        display: flex;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+        margin-top: 2rem;
+
+    }
+
+    .vault-actions .btn {
+
+        min-width: 190px;
+
+        padding:
+            0.95rem 1.5rem;
+
+        font-weight: 600;
+
+    }
+
+    .security-box {
+
+        margin-top: 2.5rem;
+
+        padding: 1.4rem 1.5rem;
+
+        border-radius: 18px;
+
+        background:
+            rgba(79, 140, 255, 0.06);
+
+        border:
+            1px solid rgba(79, 140, 255, 0.12);
+
+    }
+
+    .security-box h6 {
+
+        margin-bottom: 0.7rem;
+
+    }
+
+    .security-box p {
+
+        margin-bottom: 0;
+
+        color: var(--text-secondary);
+
+        line-height: 1.8;
+
+        font-size: 0.92rem;
+
+    }
+
+    @media (max-width: 768px) {
+
+        .vault-create-card {
+
+            padding: 2rem 1.4rem;
+
+        }
+
+        .vault-create-title {
+
+            font-size: 1.8rem;
+
+        }
+
+    }
+
+    @media (max-width: 576px) {
+
+        .vault-actions {
+
+            flex-direction: column;
+
+        }
+
+        .vault-actions .btn {
+
+            width: 100%;
+
+        }
+
+    }
+
+</style>
+
+<div class="vault-create-wrapper">
+
+    <div class="vault-card vault-create-card">
+
+        <div class="vault-create-badge">
+            V
+        </div>
+
+        <h1 class="vault-create-title">
+            Create New Vault Secret
+        </h1>
+
+        <p class="vault-create-subtitle">
+
+            Store sensitive information securely inside your
+            personal authenticated vault. Only your account
+            can manage and access these secrets.
+
+        </p>
+
+        <form action="/vault/new" method="post">
+
+            <div class="form-group">
+                <label for="title" class="form-label">
+                    Secret Title
+                </label>
+
+                <input type="text"
+                id="title"
+                name="title"
+                maxlength="100"
+                required
+                class="form-control"
+                placeholder="e.g. Netflix account details">
+            </div>
+
+            <div class="mb-4">
+
+                <label class="form-label">
+                    Secret Data
+                </label>
+
+                <textarea
+                    id="hiddenData"
+                    name="hiddenData"
+                    class="form-control secret-textarea"
+                    placeholder="Write your secret data here..."
+                    required
+                ></textarea>
+                <p id="charCount">0/5000 characters</p>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Secret Password
+                </label>
+
+                <input
+                    id="secretPassword"
+                    type="password"
+                    name="pass"
+                    placeholder="Set a protection password"
+                    class="form-control"
+                    required
+                >
+                <div class="form-check mt-2">
+                    <input type="checkbox" id="showPassword"
+                    class="form-check-input"
+                    >
+                    <label for="showPassword" class="form-check-label">
+                        Show Password
+                    </label>
+                </div>
+
+                <p class="password-note">
+
+                    This password adds an extra protection layer
+                    for your secret data inside your vault.
+
+                </p>
+
+            </div>
+
+            <div class="vault-actions">
+
+                <button class="btn btn-primary">
+                    Create Secret
+                </button>
+
+                <a
+                    href="/dashboard"
+                    class="btn btn-outline-light"
+                >
+                    Back to Dashboard
+                </a>
+
+            </div>
+
+        </form>
+
+        <div class="security-box">
+
+            <h6>
+                Vault Protection
+            </h6>
+
+            <p>
+
+                Your private vault secrets are connected to your
+                authenticated account and can only be managed
+                from your personal dashboard.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+    const textarea = document.getElementById("hiddenData");
+    const counter = document.getElementById("charCount");
+    
+    function updateCounter(){
+        const length = textarea.value.length;
+
+        counter.textContent = `${length} / 5000 characters`;
+
+        if(length >= 4500){
+            counter.style.color = "red";
+        }
+        else {
+            counter.style.color = "";
+        }
+    }
+
+textarea.addEventListener("input" , updateCounter);
+
+updateCounter();
+
+const passwordInput = document.getElementById("secretPassword");
+const showPassword = document.getElementById("showPassword");
+
+showPassword.addEventListener("change", ()=> {
+    if(showPassword.checked){
+        passwordInput.type = "text";
+    } else {
+        passwordInput.type = "password";
+    }
+});
+</script>
+<%- include("../partials/footer.ejs") %>

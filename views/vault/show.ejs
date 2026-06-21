@@ -1,0 +1,129 @@
+<%- include("../partials/head.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+<%- include("../partials/flash.ejs") %>
+
+<style>
+
+    .show-wrapper{
+        padding: 2rem 0 4rem;
+    }
+
+    .show-card{
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem;
+    }
+
+    .show-badge{
+
+        display: inline-block;
+
+        padding: 0.4rem 0.8rem;
+
+        border-radius: 999px;
+
+        background: rgba(79, 140, 255, 0.10);
+
+        color: var(--accent-primary);
+
+        font-size: 0.8rem;
+
+        font-weight: 600;
+
+        margin-bottom: 1rem;
+    }
+
+    .show-title{
+        font-size: 2rem;
+        margin-bottom: 1rem;
+    }
+
+    .show-meta{
+        color: var(--text-secondary);
+        margin-bottom: 0.5rem;
+    }
+
+    .show-content{
+
+        margin-top: 2rem;
+
+        line-height: 1.9;
+
+        white-space: pre-wrap;
+
+        word-break: break-word;
+
+        padding: 1.5rem;
+
+        border-radius: 16px;
+
+        background: rgba(255,255,255,0.03);
+
+        border: 1px solid var(--border-color);
+    }
+
+    .show-actions{
+
+        display: flex;
+
+        gap: 1rem;
+
+        flex-wrap: wrap;
+
+        margin-top: 2rem;
+    }
+
+</style>
+
+<div class="show-wrapper">
+    <div class="vault-card show-card">
+        <span class="show-badge">
+            Private Secret
+        </span>
+
+        <h1 class="show-title">
+            <%= data.title %>
+        </h1>
+        <p class="show-meta">
+            Created: <%= data.createdAt? data.createdAt.toLocaleDateString() : "Unknown" %>
+        </p>
+         
+        <p class="show-meta">
+            Updated: <%= data.updatedAt? data.updatedAt.toLocaleDateString() : "Unknown" %>
+        </p>
+
+        <div class="show-content">
+            <%= data.hiddenData %>
+        </div>
+
+        <div class="show-actions">
+            <a href="/vault/<%= data._id %>/edit" class="btn btn-primary">Edit Secret
+            </a>
+
+            <button class="btn btn-success" onclick="copySecret()" type="button">
+                Copy Secret
+            </button>
+
+            <a href="/dashboard" class="btn btn-outline-light">
+                Back to Dashboard
+            </a>
+        </div>        
+    </div>
+</div>
+
+<script>
+
+    function copySecret(){
+
+        const secretText = `<%= data.title %> 
+        <%= data.hiddenData %>`;
+
+        navigator.clipboard.writeText(secretText);
+
+        alert("Secret copied successfully!");
+
+    }
+
+</script>
+
+<%- include("../partials/footer.ejs") %>

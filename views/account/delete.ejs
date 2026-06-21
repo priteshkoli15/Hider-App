@@ -1,0 +1,108 @@
+<%- include("../partials/head.ejs") %>
+<%- include("../partials/navbar.ejs") %>
+<%- include("../partials/flash.ejs") %>
+
+<style>
+    .delete-btn {
+        background-color: var(--danger-color);
+        border: none;
+        color: white;
+        padding: 0.9rem 1.2rem;
+        font-weight: 600;
+    }
+    
+    .delete-btn:hover {
+        background-color: #dc2626;
+    }
+</style>
+
+<div class="container mt-5">
+
+    <div class="vault-card p-4">
+
+        <h2 class="text-danger">
+            Delete Account
+        </h2>
+
+        <p>
+
+            This action is permanent.
+
+        </p>
+
+        <ul>
+
+            <li>Your account will be deleted.</li>
+
+            <li>All vault secrets will be deleted.</li>
+
+            <li>You will be logged out immediately.</li>
+
+            <li>Anonymous secrets will NOT be deleted.</li>
+
+        </ul>
+
+        <form
+            action="/account/delete"
+            method="POST"
+        >
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Confirm Password
+                </label>
+
+                <input
+                    id="deletePassword"
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    required
+                >
+                <div class="form-check mt-2">
+                    <input type="checkbox" id="showPassword"
+                    class="form-check-input"
+                    >
+                    <label for="showPassword" class="form-check-label">
+                        Show Password
+                    </label>
+                </div>
+
+            </div>
+
+            <button
+                class="btn delete-btn"
+                onclick="return confirm('Are you absolutely sure? This action cannot be undone.')"
+            >
+                Permanently Delete Account
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+
+    const passwordInput =
+        document.getElementById("deletePassword");
+
+    const showPassword =
+        document.getElementById("showPassword");
+
+    showPassword.addEventListener("change", () => {
+
+        if(showPassword.checked){
+            passwordInput.type = "text";
+        }
+        else{
+            passwordInput.type = "password";
+        }
+
+    });
+
+</script>
+
+<%- include("../partials/footer.ejs") %>
