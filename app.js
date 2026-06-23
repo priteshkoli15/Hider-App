@@ -31,6 +31,7 @@ const sessionOptions = {
     }
 }
 
+app.set("trust proxy", 1);
 app.use(session(sessionOptions));
 app.use(flash());
 app.use(express.static(path.join(__dirname , "public")));
@@ -41,10 +42,14 @@ app.use(methodOverride("_method"));
 //Middlewares
 
 //middleware for session
-function isLoggedIn(req , res , next){
-    if(!req.session.userId){
+function isLoggedIn(req, res, next) {
+
+    console.log("Current session:", req.session);
+
+    if (!req.session.userId) {
         throw new ExpressError(401, "You must login first");
     }
+
     next();
 }
 
@@ -323,7 +328,9 @@ app.post("/login" , asyncWrap(async(req , res) => {
     }
     req.session.userId = user._id;
 
-    req.flash("success" , `Welcome back!! ${user.username}`);
+    console.log("After login session:", req.session);
+
+    // req.flash("success" , `Welcome back!! ${user.username}`);
 
     res.redirect("/dashboard");
 }));
