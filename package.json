@@ -1,7 +1,12 @@
 {
-  "scripts" : {
-    "start" : "node app.js"
+  "scripts": {
+    "start": "node app.js"
   },
+
+  "engines": {
+    "node": ">=20"
+  },
+
   "dependencies": {
     "bcrypt": "^6.0.0",
     "connect-flash": "^0.1.1",
@@ -11,9 +16,6 @@
     "express": "^5.2.1",
     "express-session": "^1.19.0",
     "method-override": "^3.0.0",
-    "mongoose": "^9.4.1",
-    "engines" : {
-      "node" : ">=20"
-    }
+    "mongoose": "^9.4.1"
   }
 }

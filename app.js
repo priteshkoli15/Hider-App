@@ -75,10 +75,13 @@ main()
     console.log("Connection Successfull");
 })
 .catch((err) => {
-    console.log(err);
+    console.error("MongoDB Connection Error:");
+    console.error(err);
+    console.error(err.stack);
 });
 
 async function main(){
+    console.log(process.env.MONGO_URL);
     await mongoose.connect(process.env.MONGO_URL);
 }
 
