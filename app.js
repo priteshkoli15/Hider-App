@@ -107,6 +107,11 @@ app.get("/testflash", (req, res) => {
 
 //ANONYMOUS MODE
 
+//Root route
+app.get("/", (req, res) => {
+    res.redirect("/datas");
+});
+
 //Index Route
 app.get("/datas" , asyncWrap(async(req , res , next) => {
     // let datas = await HiddenData.find();
